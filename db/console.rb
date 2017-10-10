@@ -1,14 +1,24 @@
-require( 'pg' )
+require('pry-byebug')
+require_relative('../models/bounty.rb')
 
-class Bounty
 
-  attr_accessor :name, :last_known_location, :danger_level, :bounty_value
-  attr_reader :id
+bounty1 = Bounty.new({ 'name'=> 'Venom Snake', 'last_known_location'=> 'Siberia', 'danger_level'=> 'medium', 'bounty_value' => 50000})
+bounty2 = Bounty.new({ 'name'=> 'Revolver Ocelot', 'last_known_location'=> 'Zanzibar', 'danger_level'=> 'high', 'bounty_value' => 100000})
 
-  def initialize( options )
-    @name = options['name']
-    @last_known_location = options['last_known_location']
-    @danger_level = options['danger_level']
-    @bounty_value = options['bounty_value'].to_i
-    @id = options['id'].to_i if options['id']
-  end
+bounty1.save()
+
+#  INFO: From terminal: psql -d bounties -c 'SELECT * FROM bounties'
+
+bounty1.name = 'Big Boss'
+bounty1.update()
+#
+
+#
+# bounty1.delete()
+#
+#
+#
+# bounty2.update()
+
+binding.pry
+nil
